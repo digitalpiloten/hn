@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 import style from './style';
 
+import { Link } from 'preact-router/match';
+
 class Home extends Component {
 
 	state =  {
@@ -27,7 +29,11 @@ class Home extends Component {
 				<h1>Home</h1>
 				<ul>
 					{this.state.stories.map((story, i) => (
-						<li>{story.title}</li>
+						<li>
+							<Link href={`/${story.id}`}>
+								{story.title}
+							</Link>
+						</li>
 					))}
 				</ul>
 			</div>

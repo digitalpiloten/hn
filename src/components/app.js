@@ -4,6 +4,7 @@ import { Router } from 'preact-router';
 
 // Code-splitting is automated for routes
 import Home from '../routes/home';
+import Item from '../routes/item';
 import Profile from '../routes/profile';
 
 export default class App extends Component {
@@ -21,8 +22,7 @@ export default class App extends Component {
 			<div id="app">
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
-					<Profile path="/profile/" user="me" />
-					<Profile path="/profile/:user" />
+					<Item path="/:id" />
 				</Router>
 			</div>
 		);
