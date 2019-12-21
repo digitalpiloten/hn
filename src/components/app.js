@@ -5,7 +5,6 @@ import { Router } from 'preact-router';
 // Code-splitting is automated for routes
 import Home from '../routes/home';
 import Item from '../routes/item';
-import Profile from '../routes/profile';
 
 export default class App extends Component {
 	
