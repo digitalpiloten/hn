@@ -3,10 +3,21 @@ import style from './style';
 
 class Home extends Component {
 
+	state =  {
+		stories: []
+	}
+
 	componentDidMount() {
-		fetch('https://hacker-news.firebaseio.com/v0/topstories.json').then((response) => response.json()).then((json) => {
-			// eslint-disable-next-line no-console
-			console.log(json);
+		fetch('https://hacker-news.firebaseio.com/v0/topstories.json').then((response) => response.json()).then((_topstories) => {
+			_topstories.forEach(story => {
+				fetch(`https://hacker-news.firebaseio.com/v0/item/${story}.json`).then((responseStory) => responseStory.json()).then((_story) => {
+					let __stories = this.state.stories;
+					__stories.push(_story);
+					this.setState({
+						stories: __stories
+					});
+				});
+			});
 		});
 	}
 
@@ -14,7 +25,11 @@ class Home extends Component {
 		return (
 			<div class={style.home}>
 				<h1>Home</h1>
-				<p>This is the Home component.</p>
+				<ul>
+					{this.state.stories.map((story, i) => (
+						<li>{story.title}</li>
+					))}
+				</ul>
 			</div>
 		);
 	}
